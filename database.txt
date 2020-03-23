@@ -1,0 +1,39 @@
+create database JobPortal
+
+create table Register_Seeker(seeker_id int identity(101,1) primary key, fname varchar(20),
+							lname varchar(20), age varchar(3), email varchar(30),
+							password varchar(20), confirmpassword varchar(20))
+
+select * from Register_Seeker
+
+create table Register_Employer(employer_id int identity(1001,1) primary key,fname varchar(20),
+							lname varchar(20), age varchar(3), email varchar(30),
+							password varchar(20), confirmpassword varchar(20),
+							comapny_name varchar(20), contactno varchar(20))
+							 
+create table Admin_Table(admin_id int identity(2000,1) primary key, name varchar(20),
+							email varchar(30),password varchar(20),jobs varchar(20),employer varchar(20),
+							applicants varchar(20),status varchar(20))
+
+create table Admin_Login(email varchar(20), password varchar(20))
+select * from Admin_Login
+insert into Admin_Login values('kmehwala@gmail.com','12345')
+
+create table Job_Table(job_id int identity(1,1) primary key, jobdescription varchar(20),
+						jobcriteria varchar(20), salary varchar(20),
+						location varchar(20))
+
+create table Seeker_Profile(profile_id int identity(3000,1) primary key, seeker_id int constraint con_fk foreign key 
+						references Register_Seeker(seeker_id), qualification varchar(15),
+						 hobbies varchar(20), address varchar(20), contact varchar(15),
+						 tenth_marks varchar(10), twelve_marks varchar(10), field varchar(20),
+								)
+
+create table Employer_Profile(eprofileid int identity(300,1) primary key, employer_id int constraint emp_fk foreign key
+						references Register_Employer(employer_id), company_name varchar(20),
+						 contact_no varchar(20), job_requirement varchar(20))
+						 -- this contact no is for compan	y--
+select * from Employer_Profile
+
+alter table Employer_Profile
+drop column company_name
